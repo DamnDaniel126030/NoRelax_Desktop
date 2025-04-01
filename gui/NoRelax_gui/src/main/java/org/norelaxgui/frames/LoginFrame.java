@@ -1,4 +1,4 @@
-package org.norelaxgui;
+package org.norelaxgui.frames;
 
 import org.norelaxgui.view.GradientBackgroundPanel;
 
@@ -10,6 +10,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Arrays;
 
 public class LoginFrame extends JFrame {
   private JTextField emailField;
@@ -21,10 +22,13 @@ public class LoginFrame extends JFrame {
     setDefaultCloseOperation(EXIT_ON_CLOSE);
     setSize(400, 500);
     setLocationRelativeTo(null);
+    setResizable(false);
     GradientBackgroundPanel gradientPanel = createGradientPanel();
     setContentPane(gradientPanel);
     setupUIComponents(gradientPanel);
     setVisible(true);
+    ImageIcon icon = new ImageIcon("src/images/NoRelaxLogo.png");
+    setIconImage(icon.getImage());
   }
 
   private GradientBackgroundPanel createGradientPanel(){
@@ -58,12 +62,14 @@ public class LoginFrame extends JFrame {
   private JTextField createTextField(String placeholder){
     JTextField textField = new JTextField(20);
     styleTextField(textField, placeholder);
+    textField.addActionListener(e -> handleLogin());
     return textField;
   }
 
   private JPasswordField createPasswordField(String placeholder){
     JPasswordField passwordField = new JPasswordField(20);
     styleTextField(passwordField, placeholder);
+    passwordField.addActionListener(e -> handleLogin());
     return passwordField;
   }
 
@@ -96,11 +102,12 @@ public class LoginFrame extends JFrame {
   private JButton createLoginButton(){
     JButton button = new JButton("Login");
     button.setFont(new Font("Arial", Font.BOLD, 16));
-    button.setForeground(Color.WHITE);
-    button.setBackground(new Color(70, 130, 180));
-    button.setBorder(new LineBorder(new Color(60, 120, 170), 2, true));
+    button.setForeground(Color.BLACK);
+    button.setBackground(new Color(224, 224, 224));
+    button.setBorder(new LineBorder(new Color(96, 96, 96), 2, true));
     button.setFocusPainted(false);
     button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    button.setPreferredSize(new Dimension(70, 40));
     addHoverEffect(button);
     button.addActionListener(e -> handleLogin());
     return button;
@@ -110,12 +117,12 @@ public class LoginFrame extends JFrame {
     button.addMouseListener(new MouseAdapter() {
       @Override
       public void mouseEntered(MouseEvent e) {
-        button.setBackground(new Color(100, 160, 220));
+        button.setBackground(new Color(64, 64, 64));
       }
 
       @Override
       public void mouseExited(MouseEvent e) {
-        button.setBackground(new Color(70, 130, 180));
+        button.setBackground(new Color(224, 224, 224));
       }
     });
   }
@@ -132,8 +139,16 @@ public class LoginFrame extends JFrame {
   private void handleLogin(){
     String email = emailField.getText();
     char[] password = passwordField.getPassword();
-    System.out.println(email);
-    System.out.println(String.valueOf(password));
-    JOptionPane.showMessageDialog(this, "Logged in");
+    if (email.equals("Email address") || new String(password).trim().equals("Password")){
+      JOptionPane.showMessageDialog(this, "Please enter a valid email address");
+    }
+    else {
+      System.out.println(email);
+      System.out.println(String.valueOf(password));
+      JOptionPane.showMessageDialog(this, "Logged in");
+      dispose();
+      MainFrame mainFrame = new MainFrame();
+      mainFrame.setVisible(true);
+    }
   }
 }
