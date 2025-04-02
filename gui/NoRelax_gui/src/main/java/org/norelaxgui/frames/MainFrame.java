@@ -1,6 +1,7 @@
 package org.norelaxgui.frames;
 
 import org.norelaxgui.frames.components.Navbar;
+import org.norelaxgui.frames.components.TablePanel;
 import org.norelaxgui.view.GradientBackgroundPanel;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -22,8 +23,12 @@ public class MainFrame extends JFrame {
     setContentPane(gradientPanel);
     gradientPanel.setLayout(new BorderLayout());
 
-    Navbar navbar = new Navbar();
+    TablePanel tablePanel = new TablePanel();
+    tablePanel.showOrders();
+
+    Navbar navbar = new Navbar(tablePanel);
     gradientPanel.add(navbar, BorderLayout.WEST);
+    gradientPanel.add(tablePanel, BorderLayout.CENTER);
 
     ImageIcon icon = new ImageIcon("src/images/NoRelaxLogo.png");
     setIconImage(icon.getImage());

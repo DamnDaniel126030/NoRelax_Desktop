@@ -8,6 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class Navbar extends JPanel {
+  private TablePanel tablePanel;
   private JPanel buttonPanel;
   private boolean isCollapsed = false;
   private final int EXPANDED_WIDTH = 180;
@@ -17,7 +18,9 @@ public class Navbar extends JPanel {
   private int navbarWidth;
 
 
-  public Navbar(){
+  public Navbar(TablePanel tablePanel) {
+    this.tablePanel = tablePanel;
+
     navbarWidth = EXPANDED_WIDTH;
     setPreferredSize(new Dimension(EXPANDED_WIDTH, getHeight()));
     setBackground(new Color(30, 30, 30));
@@ -27,9 +30,9 @@ public class Navbar extends JPanel {
     buttonPanel.setLayout(new GridLayout(3, 1, 0, 10));
     buttonPanel.setBackground(new Color(30, 30, 30));
 
-    buttonPanel.add(createNavButton("Rendelések"));
-    buttonPanel.add(createNavButton("Itallap"));
-    buttonPanel.add(createNavButton("Asztalfoglalások"));
+    buttonPanel.add(createNavButton("Rendelések", tablePanel::showOrders));
+    buttonPanel.add(createNavButton("Itallap", tablePanel::showProducts));
+    buttonPanel.add(createNavButton("Asztalfoglalások", tablePanel::showReservations));
 
     toggleButton = new JButton("☰");
     toggleButton.setFont(new Font("Ariel", Font.BOLD, 14));
@@ -46,7 +49,7 @@ public class Navbar extends JPanel {
     add(buttonPanel, BorderLayout.CENTER);
   }
 
-  private JButton createNavButton(String label){
+  private JButton createNavButton(String label, Runnable action) {
     JButton button = new JButton(label);
     button.setForeground(Color.WHITE);
     button.setBackground(new Color(50, 50, 50));
@@ -55,6 +58,7 @@ public class Navbar extends JPanel {
     button.setFont(new Font("Arial", Font.BOLD, 14));
     button.setCursor(new Cursor(Cursor.HAND_CURSOR));
     button.setPreferredSize(new Dimension(EXPANDED_WIDTH, 50));
+    button.addActionListener(e -> action.run());
 
     button.addMouseListener(new MouseAdapter() {
       @Override
