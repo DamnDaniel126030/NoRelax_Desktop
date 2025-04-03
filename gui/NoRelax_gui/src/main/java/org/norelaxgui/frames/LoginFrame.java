@@ -139,8 +139,9 @@ public class LoginFrame extends JFrame {
   private void handleLogin(){
     String email = emailField.getText();
     char[] password = passwordField.getPassword();
-    if (email.equals("Email address") || new String(password).trim().equals("Password")){
-      JOptionPane.showMessageDialog(this, "Please enter a valid email address");
+    if (email.equals("Email address") || new String(password).trim().equals("Password")
+    || email.isEmpty() || new String(password).trim().isEmpty()){
+      JOptionPane.showMessageDialog(this, "Please enter valid credentials.");
     }
     else {
       System.out.println(email);

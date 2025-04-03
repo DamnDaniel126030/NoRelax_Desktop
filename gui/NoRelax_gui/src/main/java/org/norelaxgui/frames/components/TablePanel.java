@@ -10,7 +10,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
@@ -23,7 +22,7 @@ public class TablePanel extends JPanel {
   public TablePanel() {
     setLayout(new BorderLayout());
     setOpaque(false);
-    setBorder(null);
+    setBorder(BorderFactory.createEmptyBorder());
 
     apiService = RetrofitClient.getClient().create(ApiService.class);
 
@@ -31,14 +30,13 @@ public class TablePanel extends JPanel {
     table = new JTable(tableModel);
     table.setFillsViewportHeight(true);
     table.setRowHeight(30);
-    table.setShowGrid(false);
     table.setOpaque(false);
-    table.setBorder(null);
+    table.setBorder(BorderFactory.createEmptyBorder());
 
     JScrollPane scrollPane = new JScrollPane(table);
     scrollPane.setOpaque(false);
     scrollPane.getViewport().setOpaque(false);
-    scrollPane.setBorder(null);
+    scrollPane.setBorder(BorderFactory.createEmptyBorder());
 
     add(scrollPane, BorderLayout.CENTER);
 
