@@ -1,6 +1,13 @@
 package org.norelaxgui.frames;
 
+import org.norelaxgui.RetrofitClient;
+import org.norelaxgui.login.LoginRequest;
+import org.norelaxgui.login.LoginResponse;
+import org.norelaxgui.login.LoginService;
 import org.norelaxgui.view.GradientBackgroundPanel;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -10,12 +17,12 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Arrays;
 
 public class LoginFrame extends JFrame {
   private JTextField emailField;
   private JPasswordField passwordField;
   private JButton loginButton;
+  private LoginService loginService;
 
   public LoginFrame() {
     setTitle("Login");
@@ -23,12 +30,16 @@ public class LoginFrame extends JFrame {
     setSize(400, 500);
     setLocationRelativeTo(null);
     setResizable(false);
+
     GradientBackgroundPanel gradientPanel = createGradientPanel();
     setContentPane(gradientPanel);
     setupUIComponents(gradientPanel);
     setVisible(true);
+
     ImageIcon icon = new ImageIcon("src/images/NoRelaxLogo.png");
     setIconImage(icon.getImage());
+
+    loginService = RetrofitClient.getClient().create(LoginService.class);
   }
 
   private GradientBackgroundPanel createGradientPanel(){
@@ -138,18 +149,32 @@ public class LoginFrame extends JFrame {
 
   private void handleLogin(){
     String email = emailField.getText();
+    StringBuilder passwordBuilder = new StringBuilder();
     char[] password = passwordField.getPassword();
-    if (email.equals("Email address") || new String(password).trim().equals("Password")
-    || email.isEmpty() || new String(password).trim().isEmpty()){
+    passwordBuilder.append(password);
+    if (email.equals("Email address") || passwordBuilder.toString().equals("Password")
+    || email.isEmpty() || passwordBuilder.toString().isEmpty()){
       JOptionPane.showMessageDialog(this, "Please enter valid credentials.");
     }
     else {
-      System.out.println(email);
-      System.out.println(String.valueOf(password));
-      JOptionPane.showMessageDialog(this, "Logged in");
-      dispose();
-      MainFrame mainFrame = new MainFrame();
-      mainFrame.setVisible(true);
+      LoginRequest loginRequest = new LoginRequest(email, passwordBuilder.toString());
+      loginService.login(loginRequest).enqueue(new Callback<LoginResponse>() {
+        @Override
+        public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+          if (response.body() != null && response.body().isAccountType()){
+            JOptionPane.showMessageDialog(LoginFrame.this, "Logged in");
+            dispose();
+            MainFrame mainFrame = new MainFrame();
+            mainFrame.setVisible(true);
+          }
+        }
+
+        @Override
+        public void onFailure(Call<LoginResponse> call, Throwable throwable) {
+          JOptionPane.showMessageDialog(LoginFrame.this, "Invalid credentials",
+                  "Error", JOptionPane.ERROR_MESSAGE);
+        }
+      });
     }
   }
 }

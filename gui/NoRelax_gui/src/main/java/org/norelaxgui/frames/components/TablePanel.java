@@ -94,7 +94,7 @@ public class TablePanel extends JPanel {
   }
 
   public void showProducts(){
-    loadData(apiService.getDrinks(), new String[]{"ID", "Name", "Unit", "Price"});
+    loadData(apiService.getProducts("drinks"), new String[]{"ID", "Name", "Unit", "Price"});
   }
 
   public void showReservations(){
