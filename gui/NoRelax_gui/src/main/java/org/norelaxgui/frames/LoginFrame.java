@@ -162,10 +162,14 @@ public class LoginFrame extends JFrame {
         @Override
         public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
           if (response.body() != null && response.body().isAccountType()){
+            String token = response.body().getToken();
             JOptionPane.showMessageDialog(LoginFrame.this, "Logged in");
             dispose();
-            MainFrame mainFrame = new MainFrame();
+            MainFrame mainFrame = new MainFrame(token);
             mainFrame.setVisible(true);
+          }
+          else {
+            JOptionPane.showMessageDialog(LoginFrame.this, "Not admin user");
           }
         }
 
@@ -177,4 +181,5 @@ public class LoginFrame extends JFrame {
       });
     }
   }
+
 }

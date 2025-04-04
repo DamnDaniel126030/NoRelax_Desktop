@@ -4,18 +4,22 @@ import org.norelaxgui.api.model.Order;
 import org.norelaxgui.api.model.Product;
 import org.norelaxgui.api.model.Reservation;
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.GET;
-import retrofit2.http.POST;
+import retrofit2.http.Header;
 
 import java.util.List;
 
 public interface ApiService {
-  @POST("foodDrinkProducts")
-  Call<List<Product>> getProducts(@Body String groupName);
+  @GET("foodDrinkProducts")
+  Call<List<Product>> getProducts();
 
-  @GET("reservation")
-  Call<List<Reservation>> getReservations();
+  /*@Headers({
+      "Content-Type: application/json",
+      "Accept: application/json",
+      "Authorization: Bearer " +
+  })*/
+  @GET("auth/reservation")
+  Call<List<Reservation>> getReservations(@Header("Authorization")String token);
 
   @GET("orders")
   Call<List<Order>> getOrders();

@@ -9,9 +9,11 @@ import java.awt.*;
 
 
 public class MainFrame extends JFrame {
+  private String token;
 
 
-  public MainFrame() {
+  public MainFrame(String token) {
+    this.token = token;
     setTitle("NoRelax GUI");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -23,7 +25,7 @@ public class MainFrame extends JFrame {
     setContentPane(gradientPanel);
     gradientPanel.setLayout(new BorderLayout());
 
-    TablePanel tablePanel = new TablePanel();
+    TablePanel tablePanel = new TablePanel(this.token);
     tablePanel.showOrders();
 
     Navbar navbar = new Navbar(tablePanel);

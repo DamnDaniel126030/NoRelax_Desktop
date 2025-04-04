@@ -10,6 +10,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
@@ -18,8 +19,10 @@ public class TablePanel extends JPanel {
   private JTable table;
   private DefaultTableModel tableModel;
   private ApiService apiService;
+  private String token;
 
-  public TablePanel() {
+  public TablePanel(String token) {
+    this.token = token;
     setLayout(new BorderLayout());
     setOpaque(false);
     setBorder(BorderFactory.createEmptyBorder());
@@ -27,11 +30,26 @@ public class TablePanel extends JPanel {
     apiService = RetrofitClient.getClient().create(ApiService.class);
 
     tableModel = new DefaultTableModel();
+
     table = new JTable(tableModel);
     table.setFillsViewportHeight(true);
     table.setRowHeight(30);
     table.setOpaque(false);
     table.setBorder(BorderFactory.createEmptyBorder());
+    table.setGridColor(Color.WHITE);
+    table.setFont(new Font("Ariel", Font.PLAIN, 16));
+    table.setForeground(Color.WHITE);
+    table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+      @Override
+      public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+                                                     boolean hasFocus, int row, int column){
+        Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+        component.setBackground(new Color(0, 0, 0, 0));
+        setBorder(BorderFactory.createLineBorder(Color.WHITE));
+        return component;
+      }
+    });
+
 
     JScrollPane scrollPane = new JScrollPane(table);
     scrollPane.setOpaque(false);
@@ -39,7 +57,6 @@ public class TablePanel extends JPanel {
     scrollPane.setBorder(BorderFactory.createEmptyBorder());
 
     add(scrollPane, BorderLayout.CENTER);
-
     revalidate();
     repaint();
   }
@@ -78,6 +95,7 @@ public class TablePanel extends JPanel {
             }
           }
         }
+        adjustColumnWidth();
       }
 
       @Override
@@ -94,10 +112,22 @@ public class TablePanel extends JPanel {
   }
 
   public void showProducts(){
-    loadData(apiService.getProducts("drinks"), new String[]{"ID", "Name", "Unit", "Price"});
+    loadData(apiService.getProducts(), new String[]{"ID", "Name", "Unit", "Price"});
   }
 
   public void showReservations(){
-    loadData(apiService.getReservations(), new String[]{"ID", "Reservation Date", "Table Number", "Is Reserved"});
+    loadData(apiService.getReservations("Bearer " + this.token), new String[]{"ID", "Reservation Date", "Table Number", "Is Reserved"});
+  }
+
+  private void adjustColumnWidth(){
+    for (int column = 0; column < table.getColumnCount(); column++){
+      int maxWidth = 0;
+      for (int row = 0; row < table.getRowCount(); row++){
+        Object value = table.getValueAt(row, column);
+        int cellWidth = table.getCellRenderer(row, column).getTableCellRendererComponent(table, value, false, false, row, column).getPreferredSize().width;
+        maxWidth = Math.max(maxWidth, cellWidth);
+      }
+      table.getColumnModel().getColumn(column).setPreferredWidth(maxWidth + 10);
+    }
   }
 }
