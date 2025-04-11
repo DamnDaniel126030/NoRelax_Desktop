@@ -1,6 +1,6 @@
 package org.norelaxgui.frames;
 
-import org.norelaxgui.RetrofitClient;
+import org.norelaxgui.api.RetrofitClient;
 import org.norelaxgui.login.LoginRequest;
 import org.norelaxgui.login.LoginResponse;
 import org.norelaxgui.login.LoginService;

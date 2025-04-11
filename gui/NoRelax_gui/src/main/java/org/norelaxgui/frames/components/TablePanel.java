@@ -1,6 +1,6 @@
 package org.norelaxgui.frames.components;
 
-import org.norelaxgui.RetrofitClient;
+import org.norelaxgui.api.RetrofitClient;
 import org.norelaxgui.api.ApiService;
 import org.norelaxgui.api.model.Order;
 import org.norelaxgui.api.model.Product;
@@ -39,12 +39,19 @@ public class TablePanel extends JPanel {
     table.setGridColor(Color.WHITE);
     table.setFont(new Font("Ariel", Font.PLAIN, 16));
     table.setForeground(Color.WHITE);
+    table.setSelectionBackground(Color.WHITE);
     table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
       @Override
       public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
                                                      boolean hasFocus, int row, int column){
         Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-        component.setBackground(new Color(0, 0, 0, 0));
+        if (isSelected){
+          component.setBackground(table.getSelectionBackground());
+          component.setForeground(Color.BLACK);
+        } else {
+          component.setBackground(new Color(0, 0, 0, 0));
+          component.setForeground(Color.WHITE);
+        }
         setBorder(BorderFactory.createLineBorder(Color.WHITE));
         return component;
       }
@@ -80,7 +87,6 @@ public class TablePanel extends JPanel {
               });
             } else if (item instanceof Product product) {
               tableModel.addRow(new Object[]{
-                  product.getId(),
                   product.getProductName(),
                   product.getUnit(),
                   product.getPrice()
@@ -108,11 +114,11 @@ public class TablePanel extends JPanel {
   }
 
   public void showOrders(){
-    loadData(apiService.getOrders(), new String[]{"ID", "Date", "Updated At", "Status", "Full Price"});
+    loadData(apiService.getOrders("Bearer " + this.token), new String[]{"ID", "Date", "Updated At", "Status", "Full Price"});
   }
 
   public void showProducts(){
-    loadData(apiService.getProducts(), new String[]{"ID", "Name", "Unit", "Price"});
+    loadData(apiService.getProducts(), new String[]{"Name", "Unit", "Price"});
   }
 
   public void showReservations(){

@@ -13,14 +13,9 @@ public interface ApiService {
   @GET("foodDrinkProducts")
   Call<List<Product>> getProducts();
 
-  /*@Headers({
-      "Content-Type: application/json",
-      "Accept: application/json",
-      "Authorization: Bearer " +
-  })*/
-  @GET("auth/reservation")
-  Call<List<Reservation>> getReservations(@Header("Authorization")String token);
+  @GET("reservation")
+  Call<List<Reservation>> getReservations(@Header("Authorization") String authToken);
 
   @GET("orders")
-  Call<List<Order>> getOrders();
+  Call<List<Order>> getOrders(@Header("Authorization") String authToken);
 }

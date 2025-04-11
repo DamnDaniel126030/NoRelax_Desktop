@@ -1,8 +1,8 @@
-package org.norelaxgui;
+package org.norelaxgui.api;
 
-import org.norelaxgui.login.LoginService;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
 
 public class RetrofitClient {
   private static final String BASE_URL = "http://localhost:3000/";
@@ -16,9 +16,5 @@ public class RetrofitClient {
           .build();
     }
     return retrofit;
-  }
-
-  public static LoginService getLoginService() {
-    return retrofit.create(LoginService.class);
   }
 }
