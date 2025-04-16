@@ -26,7 +26,6 @@ public class MainFrame extends JFrame {
     gradientPanel.setLayout(new BorderLayout());
 
     TablePanel tablePanel = new TablePanel(this.token);
-    tablePanel.showOrders();
 
     Navbar navbar = new Navbar(tablePanel);
     gradientPanel.add(navbar, BorderLayout.WEST);

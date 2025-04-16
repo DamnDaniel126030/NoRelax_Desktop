@@ -1,20 +1,22 @@
 package org.norelaxgui.api.model;
 
-import java.time.LocalDateTime;
-
 public class Reservation {
-  private int id;
-  private boolean isReserved;
-  private int tableNumber;
+  private String id;
   private String reservationDate;
+  private String tableNumber;
+  private String seats;
+  private boolean isReserved;
+  private String userId;
 
-  public Reservation(boolean reserved, int tableNumber, String reservationDate) {
+  public Reservation(boolean reserved, String tableNumber, String reservationDate, String userId, String seats) {
     this.isReserved = reserved;
     this.tableNumber = tableNumber;
     this.reservationDate = reservationDate;
+    this.userId = userId;
+    this.seats = seats;
   }
 
-  public int getId() {
+  public String getId() {
     return id;
   }
 
@@ -22,7 +24,7 @@ public class Reservation {
     return isReserved;
   }
 
-  public int getTableNumber() {
+  public String getTableNumber() {
     return tableNumber;
   }
 
@@ -30,15 +32,11 @@ public class Reservation {
     return reservationDate;
   }
 
-  public void setReserved(boolean reserved) {
-    isReserved = reserved;
+  public String getUserId() {
+    return userId;
   }
 
-  public void setTableNumber(int tableNumber) {
-    this.tableNumber = tableNumber;
-  }
-
-  public void setReservationDate(String reservationDate) {
-    this.reservationDate = reservationDate;
+  public String getNumberOfSeats() {
+    return seats;
   }
 }

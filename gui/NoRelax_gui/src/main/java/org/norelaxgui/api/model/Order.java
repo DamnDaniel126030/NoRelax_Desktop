@@ -1,37 +1,33 @@
 package org.norelaxgui.api.model;
 
 public class Order {
-  private int id;
-  private String date;
-  private String updatedAt;
-  private String status;
+  private String id;
   private double fullPrice;
+  private String status;
+  private String reservationId;
+  private String userId;
 
-  public Order(String date, String updatedAt, String status, double fullPrice) {
-    this.date = date;
-    this.updatedAt = updatedAt;
-    this.status = status;
+  public Order(double fullPrice, String status, String reservationId, String userId) {
     this.fullPrice = fullPrice;
+    this.reservationId = reservationId;
+    this.userId = userId;
+    this.status = status;
   }
 
-  public int getId() {
+  public String getId() {
     return id;
   }
 
-  public String getDate() {
-    return date;
+  public double getFullPrice() {
+    return fullPrice;
   }
 
-  public void setDate(String date) {
-    this.date = date;
+  public String getReservationId() {
+    return reservationId;
   }
 
-  public String getUpdatedAt() {
-    return updatedAt;
-  }
-
-  public void setUpdatedAt(String updatedAt) {
-    this.updatedAt = updatedAt;
+  public String getUserId() {
+    return userId;
   }
 
   public String getStatus() {
@@ -40,13 +36,5 @@ public class Order {
 
   public void setStatus(String status) {
     this.status = status;
-  }
-
-  public double getFullPrice() {
-    return fullPrice;
-  }
-
-  public void setFullPrice(double fullPrice) {
-    this.fullPrice = fullPrice;
   }
 }

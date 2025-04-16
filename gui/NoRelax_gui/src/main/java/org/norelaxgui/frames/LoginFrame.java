@@ -161,15 +161,20 @@ public class LoginFrame extends JFrame {
       loginService.login(loginRequest).enqueue(new Callback<LoginResponse>() {
         @Override
         public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-          if (response.body() != null && response.body().isAccountType()){
-            String token = response.body().getToken();
-            JOptionPane.showMessageDialog(LoginFrame.this, "Logged in");
-            dispose();
-            MainFrame mainFrame = new MainFrame(token);
-            mainFrame.setVisible(true);
-          }
-          else {
-            JOptionPane.showMessageDialog(LoginFrame.this, "Not admin user");
+          if (response.isSuccessful()){
+            if (response.body() != null && response.body().isAccountType()){
+              String token = response.body().getToken();
+              JOptionPane.showMessageDialog(LoginFrame.this, "Logged in");
+              dispose();
+              MainFrame mainFrame = new MainFrame(token);
+              mainFrame.setVisible(true);
+            }
+            else {
+              JOptionPane.showMessageDialog(LoginFrame.this, "Not admin user");
+            }
+          } else {
+            System.out.println(response.code());
+            JOptionPane.showMessageDialog(LoginFrame.this, "Sikertelen bejelentkezés");
           }
         }
 

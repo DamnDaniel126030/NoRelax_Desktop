@@ -1,7 +1,7 @@
 package org.norelaxgui.api.model;
 
 public class Product {
-  private int id;
+  private String id;
   private String productName;
   private String unit;
   private double price;
@@ -12,7 +12,7 @@ public class Product {
     this.price = price;
   }
 
-  public int getId() {
+  public String getId() {
     return id;
   }
 
@@ -27,18 +27,4 @@ public class Product {
   public double getPrice() {
     return price;
   }
-
-  public void setProductName(String productName) {
-    this.productName = productName;
-  }
-
-  public void setUnit(String unit) {
-    this.unit = unit;
-  }
-
-  public void setPrice(double price) {
-    this.price = price;
-  }
-
-
 }
