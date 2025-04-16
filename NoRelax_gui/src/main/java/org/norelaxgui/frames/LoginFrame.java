@@ -164,13 +164,13 @@ public class LoginFrame extends JFrame {
           if (response.isSuccessful()){
             if (response.body() != null && response.body().isAccountType()){
               String token = response.body().getToken();
-              JOptionPane.showMessageDialog(LoginFrame.this, "Logged in");
+              JOptionPane.showMessageDialog(LoginFrame.this, "Sikeres bejelentkezés");
               dispose();
               MainFrame mainFrame = new MainFrame(token);
               mainFrame.setVisible(true);
             }
             else {
-              JOptionPane.showMessageDialog(LoginFrame.this, "Not admin user");
+              JOptionPane.showMessageDialog(LoginFrame.this, "Nem admin felhasználó");
             }
           } else {
             System.out.println(response.code());
