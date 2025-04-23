@@ -33,5 +33,5 @@ A program indításához szükséges a Java 24-es verziója. Letöltés:
 
 ### 💾 Letöltés és használat
 
-1. Töltsd le a [MyApp.exe](https://github.com/DamnDaniel126030/NoRelax_Desktop/releases/tag/v1.0.0)
+1. Töltsd le a [NoRelaxGUI.exe](https://github.com/DamnDaniel126030/NoRelax_Desktop/releases/tag/v1.0.0) fájlt
 2. Dupla kattintással indítsd el (Java 24 vagy frissebb verzió szükséges).
