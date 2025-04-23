@@ -4,7 +4,7 @@ Italok felszolgálását, elérhető termékek módosítását, asztalfoglaláso
 
 ---
 
-## Funkciók
+## ⚙ Funkciók
 - Felhasználói rendelések listázása, kezelése
 - Itallap adminisztrációja, módosítása
 - Foglalások listázása
@@ -12,7 +12,7 @@ Italok felszolgálását, elérhető termékek módosítását, asztalfoglaláso
 - Java Swing UI komponensek, letisztult szerkezetben
 - Aszinkron adatbetöltés
 
-## Használt technológiák
+## 🛠 Használt technológiák
 - Java 24
 - Java Swing
 - Retrofit
@@ -20,17 +20,18 @@ Italok felszolgálását, elérhető termékek módosítását, asztalfoglaláso
 - Maven
 - Launch4j (.exe generálás)
 
-## Dokumentáció
+## 📑 Dokumentáció
 [JavaDocs megtekintése](https://damndaniel126030.github.io/NoRelax_Desktop/)
+
+---
 
 ## 🔧 Futtatás (Windows)
 
 A program indításához szükséges a Java 24-es verziója. Letöltés:
 
-👉 [Java SE 24 (Oracle)](https://www.oracle.com/java/technologies/downloads/#jdk24-windows)
+[Java SE 24 (Oracle)](https://www.oracle.com/java/technologies/downloads/#jdk24-windows)
 
 ### 💾 Letöltés és használat
 
-1. Töltsd le a [MyApp.exe]() fájlt a legújabb verziónál.
+1. Töltsd le a [MyApp.exe](https://github.com/DamnDaniel126030/NoRelax_Desktop/releases/tag/v1.0.0)
 2. Dupla kattintással indítsd el (Java 24 vagy frissebb verzió szükséges).
-3. Telepítés után a program indítható a `MyApp.exe` fájlra kattintva.
