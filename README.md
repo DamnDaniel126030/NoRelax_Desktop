@@ -20,3 +20,10 @@ Italok felszolgálását, elérhető termékek módosítását, asztalfoglaláso
 - Maven
 - Launch4j (.exe generálás)
 
+## Dokumentáció
+[JavaDocs megtekintése](https://damndaniel126030.github.io/NoRelax_Desktop/)
+
+## 💾 Letöltés és használat
+
+1. Töltsd le a [MyApp.exe]() fájlt a legújabb verziónál.
+2. Dupla kattintással indítsd el (Java 24 vagy frissebb verzió szükséges).
