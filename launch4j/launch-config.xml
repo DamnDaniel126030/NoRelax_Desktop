@@ -2,8 +2,8 @@
 <launch4jConfig>
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
-  <jar>C:\Petrik\NoRelax\NoRelax_Desktop\NoRelax_gui\out\artifacts\NoRelax_gui_jar\NoRelax_gui.jar</jar>
-  <outfile>C:\Petrik\NoRelax\NoRelax_Desktop\NoRelaxGUI.exe</outfile>
+  <jar>C:\NoRelax\NoRelax_Desktop\NoRelax_gui\out\artifacts\NoRelax_gui_jar\NoRelax_gui.jar</jar>
+  <outfile>C:\NoRelax\NoRelax_Desktop\NoRelaxGUI.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>
@@ -13,7 +13,7 @@
   <stayAlive>false</stayAlive>
   <restartOnCrash>false</restartOnCrash>
   <manifest></manifest>
-  <icon>C:\Petrik\NoRelax\NoRelax_Desktop\NoRelax_gui\src\images\NoRelaxLogo.ico</icon>
+  <icon>C:\NoRelax\NoRelax_Desktop\NoRelax_gui\src\images\NoRelaxLogo.ico</icon>
   <jre>
     <path>%JAVA_HOME%;%PATH%</path>
     <requiresJdk>true</requiresJdk>
