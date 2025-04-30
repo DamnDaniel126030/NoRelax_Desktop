@@ -233,7 +233,7 @@ public class TablePanel extends JPanel {
 
   public void showReservations(){
     loadData(apiService.getReservations("Bearer " + this.token),
-        new String[]{"Foglalás Dátuma","Foglalás dátuma", "Asztalszám", "Székek száma"});
+        new String[]{"Foglaló neve","Foglalás dátuma", "Asztalszám", "Székek száma"});
   }
 
   public void showUser(Call<User> call, Consumer<String> callback) {
